@@ -1,0 +1,46 @@
+name: Build Kernel (Stable)
+on:
+  watch:
+    types: [started]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build KernelSU Stable
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup build kernel environment
+      run: |
+        sudo apt update
+        sudo apt install libc6-dev clang flex bison libssl-dev bc python3 python2 zip unzip git lld llvm
+        mkdir -p ${{ github.workspace }}/kernel_workspace
+        
+    - name: Download Proton-clang
+      run: |
+        cd ${{ github.workspace }}/kernel_workspace
+        git clone https://github.com/kdrag0n/proton-clang.git proton-clang --depth=1
+        export PATH="${{ github.workspace }}/kernel_workspace/proton-clang/bin:$PATH"
+        
+    - name: Download kernel source
+      run: |
+        cd ${{ github.workspace }}/kernel_workspace
+        git clone https://github.com/likkai/ksu_kernel_xiaomi_lisa.git --depth=1
+        
+    - name: Integrate KernelSU
+      run: |
+        cd ${{ github.workspace }}/kernel_workspace/ksu_kernel_xiaomi_lisa
+        rm -rf KernelSU
+        curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s main
+        
+    - name: Compiling Kernel
+      run: |
+        cd ${{ github.workspace }}/kernel_workspace/ksu_kernel_xiaomi_lisa
+        ./build.sh
+        
+    - name: Uploading Kernel
+      uses: actions/upload-artifact@v3
+      with:
+        name: QuicksilveR_Dev_KernelSU.zip
+        path: ${{ github.workspace }}/kernel_workspace/ksu_kernel_xiaomi_lisa/QuicksilveR*.zip
