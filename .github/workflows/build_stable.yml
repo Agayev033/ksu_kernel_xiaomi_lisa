@@ -39,8 +39,21 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/ksu_kernel_xiaomi_lisa
         ./build.sh
         
-    - name: Uploading Kernel
+    - name: Uploading Kernel Try 1/3
       uses: actions/upload-artifact@v3
       with:
         name: QuicksilveR_KernelSU.zip
         path: ${{ github.workspace }}/kernel_workspace/ksu_kernel_xiaomi_lisa/QuicksilveR*.zip
+        
+    - name: Uploading Kernel Try 2/3
+      uses: actions/upload-artifact@v3
+      with:
+        name: QuicksilveR_KernelSU.zip
+        path: QuicksilveR*.zip
+    
+    - name: Uploading Kernel Try 3/3
+      run: cd $GITHUB_WORKSPACE/kernel_workspace/ksu_kernel_xiaomi_lisa
+    - uses: actions/upload-artifact@v3
+      with:
+        name: QuicksilveR_KernelSU.zip
+        path: QuicksilveR*.zip
