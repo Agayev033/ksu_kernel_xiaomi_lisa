@@ -43,4 +43,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: QuicksilveR_KernelSU.zip
-        path: $GITHUB_WORKSPACE/kernel_workspace/ksu_kernel_xiaomi_lisa/QuicksilveR*.zip
+        path: ${{ github.workspace }}/kernel_workspace/ksu_kernel_xiaomi_lisa/QuicksilveR*.zip
