@@ -42,5 +42,5 @@ jobs:
     - name: Uploading Kernel
       uses: actions/upload-artifact@v3
       with:
-        name: QuicksilveR*
-        path: kernel_workspace/ksu_kernel_xiaomi_lisa
+        name: QuicksilveR.zip
+        path: $GITHUB_WORKSPACE/kernel_workspace/ksu_kernel_xiaomi_lisa/QuicksilveR*.zip
