@@ -1,4 +1,4 @@
-name: Build Kernel (Stable)
+name: Build Kernel (Dev)
 on:
   watch:
     types: [started]
