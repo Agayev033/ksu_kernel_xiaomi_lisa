@@ -38,9 +38,12 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/ksu_kernel_xiaomi_lisa
         ./build.sh
+        filename=$(pwd -P)/Quick*.zip
+        echo $filename
+        echo "FILENAME=$filename" >> $GITHUB_ENV
         
     - name: Uploading Kernel
       uses: actions/upload-artifact@v3
       with:
         name: QuicksilveR_KernelSU
-        path: ${{ github.workspace }}/kernel_workspace/ksu_kernel_xiaomi_lisa/QuicksilveR*.zip
+        path: ${{ env.FILENAME }}
