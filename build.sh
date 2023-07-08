@@ -71,4 +71,3 @@ cd ..
 rm -rf AnyKernel3
 echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
 echo "Zip: $ZIPNAME"
-mv $ZIPNAME QuicksilveR_Dev_KernelSU.zip
